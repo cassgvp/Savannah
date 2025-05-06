@@ -28,7 +28,7 @@ urlpatterns = [
     path('', include('frontendv2.urls')),
 
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
-    path('billing/', include('billing.urls')),
+#    path('billing/', include('billing.urls')),
     path('demo/', include('demo.urls')),
 ] 
 

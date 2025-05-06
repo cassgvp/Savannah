@@ -182,16 +182,17 @@ class SavannahView:
 
     def _add_sources_message(self):
         if self.request.method == "GET" and self.request.user.is_authenticated:
-            if self.community.status == Community.SUSPENDED:
-                messages.warning(self.request, "Updates to this community have been suspended due to a billing problem. Please update your <a href=\"%s\">billing information</a> to resume updates." % reverse('billing:manage_account', kwargs={'community_id':self.community.id}))
-            elif self.community.status == Community.DEACTIVE:
-                messages.error(self.request, "This community has been deactivated and will not recieve updates. You may reactive is by <a href=\"%s\">starting a new subscription</a>." % (reverse('billing:signup_subscribe', kwargs={'community_id':self.community.id}),))
-            elif self.community.status == Community.ARCHIVED:
+#            if self.community.status == Community.SUSPENDED:
+#                messages.warning(self.request, "Updates to this community have been suspended due to a billing problem. Please update your <a href=\"%s\">billing information</a> to resume updates." % reverse('billing:manage_account', kwargs={'community_id':self.community.id}))
+#            elif self.community.status == Community.DEACTIVE:
+#                messages.error(self.request, "This community has been deactivated and will not recieve updates. You may reactive is by <a href=\"%s\">starting a new subscription</a>." % (reverse('billing:signup_subscribe', kwargs={'community_id':self.community.id}),))
+#            elif self.community.status == Community.ARCHIVED:
+            if self.community.status == Community.ARCHIVED:
                 messages.info(self.request, "This community has been archived and will no longer receive updates.")
             elif self.community.source_set.all().count() == 0:
                 messages.info(self.request, "It looks like you haven't added any data sources to <b>%s</b> yet, you can do that on the <a class=\"btn btn-primary btn-sm\" href=\"%s\"><i class=\"fas fa-file-import\"></i> Sources</a> page." % (self.community.name, reverse('sources', kwargs={'community_id':self.community.id})))
-            elif self.community.status == Community.SETUP:
-                messages.success(self.request, "Your community is all set! <a href=\"%s\">Start you subsription now</a> and Savannah will begin importing your data." % reverse('billing:signup_org', kwargs={'community_id':self.community.id}))
+#            elif self.community.status == Community.SETUP:
+#                messages.success(self.request, "Your community is all set! <a href=\"%s\">Start you subsription now</a> and Savannah will begin importing your data." % reverse('billing:signup_org', kwargs={'community_id':self.community.id}))
         
     @property
     def context(self):
@@ -593,7 +594,8 @@ def new_community(request):
     if settings.IS_DEMO:
         return redirect('demo:new')
     else:
-        return redirect('billing:signup')
+#        return redirect('billing:signup')
+        pass  # Do nothing if not in DEMO
     
 def branding(request):
     context = {

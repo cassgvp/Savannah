@@ -1,0 +1,124 @@
+install pipx
+https://pypi.org/project/pipx/
+ - didn;t work. 
+
+used pip install
+https://virtualenv.pypa.io/en/latest/installation.html
+
+have to then run virtualenv eith 
+> python -m virtualenv --help
+
+
+
+https://github.com/SavannahHQ/Savannah
+
+python -m virtualenv --python=python3 ./env
+
+update requirements.txt
+feedparser==5.2.1 >> feedparser>=6.0.0
+
+urllib3==1.26.5 >> urllib3
+
+asgiref==3.2.3 >> asgiref
+
+
+typed-ast==1.4.1 >> typed-ast>=1.5.0
+
+Created a conda env rather than virtualenv
+>> savannah_env
+- will have to copy this for later distirbution
+- remember to activate, then we're in python so:
+
+
+./manage.py migrate
+
+Lots of issues with pytwitter, so commented it out of CORM_PLUGGINGS in /repos/Savannah/savannah/settings.py (line 132)
+
+#    "corm.plugins.twitter.TwitterPlugin"
+
+Errors about not havind stripe webhook. Decided we won't need that integration so commenting it out in settings.py (line 115)
+
+#    'djstripe',
+#    'billing.apps.BillingConfig',
+
+Moved billing to old_billing
+
+/Users/cgouldvanpraag/Library/CloudStorage/OneDrive-TheAlanTuringInstitute/repos/Savannah/savannah/urls.py commented out biulling (line 31)
+
+need to install the scikit-learn library in your savannah_env Conda environment.
+
+Creating superuser
+
+Username (leave blank to use 'cgouldvanpraag'): cassgvp
+Email address: cassandra.gouldvanpraag@rcmcooperative.com
+Password: qygmik-muvkiw-Cuxqe4
+
+had to have a few goes to get to the admin page
+
+--------
+
+Adding slack as a source
+
+Create a Slack App:
+
+Go to the Slack API website: https://api.slack.com/apps
+Click on "Create New App".
+Choose "From scratch".
+Give your app a name (e.g., "Savannah Integration") and select your workspace.
+
+
+Okay, let's get your Slack app installed to your workspace. Here's how you do it:
+
+Go to the Slack API website: Open your web browser and navigate to https://api.slack.com/apps.
+
+Select your app: Click on the name of the app you created for the Savannah integration. It should be listed under "Your Apps."
+
+Navigate to "OAuth & Permissions": In the left-hand sidebar of your app's settings, click on "OAuth & Permissions."
+
+Review the Scopes: On this page, you'll see the "Scopes" section. Ensure that you have added the necessary Bot Token Scopes as we discussed earlier (e.g., channels:history, groups:history, im:history, mpim:history, users:read, users:read.email, team:read). If you haven't added them yet, you can do so here by clicking "Add an OAuth Scope."
+
+==the groups and im auth gives access to private channels and dms where savannah has been given access. Not sure how I feel about this. Need to ake sure that people know what information is being collected and how to enable/disable savannah.==
+
+ Install App to Workspace: At the top of the "OAuth & Permissions" page, you should see a section titled "Install App to Workspace." Click on the button that says "Install App to Workspace."   
+
+ Authorize the App: You will be redirected to a Slack authorization page. This page will show you the app's name, the permissions it's requesting, and the workspace it will be installed in. Carefully review the requested permissions. If everything looks correct, click the "Allow" button to authorize the app.   
+
+ Obtain the Bot User OAuth Token: After you authorize the app, you will be redirected back to the "OAuth & Permissions" page of your app's settings. You should now see a section labeled "Bot User OAuth Tokens for Your Workspace." The token will be a long string of characters starting with xoxb-. This is the "Api key" you need to copy and paste into the Savannah "Add source" form.   
+
+Important Notes:
+
+You need to be an administrator or have the necessary permissions within your Slack workspace to install apps.
+Keep this Bot User OAuth Token secure, as it allows access to your Slack workspace on behalf of your app.
+Once you have successfully installed the app and obtained the Bot User OAuth Token, you can proceed to enter it into the Savannah "Add source" form as we discussed.
+
+
+
+Bot User OAuth Token ("Api key" in Savannah)
+xoxb-8416971596049-8800288699398-3TUg5SSBi3MSSYPQ8VIYW1tK
+
+Client Secret ("Auth Secret" in Savannah)
+033b9e40b4e8762aa30ed42f2b95e835
+
+Once you've created your Source you can run the importers with
+manage.py import all
+Did this in a new tab (one was running local host) and activate the savannah_env first
+
+More errors about 'billing' in generating the dahsboard
+
+frontendv2/views/__init__.py.
+
+
+in /Users/cgouldvanpraag/Library/CloudStorage/OneDrive-TheAlanTuringInstitute/repos/Savannah/frontendv2/templates/savannahv2/base.html
+
+                {% if view.community.owner == request.user %}
+                <!-- <a class="dropdown-item" href="{% url 'billing:manage_account' view.community.id %}">
+                  <i class="fas fa-money-check-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Billing
+                </a> -->
+                {% endif %}
+
+had to delete the commented lines
+
+
+
+

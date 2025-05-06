@@ -112,8 +112,8 @@ INSTALLED_APPS = [
     'apiv1.apps.Apiv1Config',
     'demo.apps.DemoConfig',
 
-    'djstripe',
-    'billing.apps.BillingConfig',
+#    'djstripe',
+#    'billing.apps.BillingConfig',
 ]
 
 CORM_PLUGINS = [
@@ -129,7 +129,7 @@ CORM_PLUGINS = [
     "corm.plugins.slack.SlackPlugin",
     "corm.plugins.stackexchange.StackExchangePlugin",
     "corm.plugins.salesforce.SalesforcePlugin",
-    "corm.plugins.twitter.TwitterPlugin"
+#    "corm.plugins.twitter.TwitterPlugin"
 ]
 
 MIDDLEWARE = [
