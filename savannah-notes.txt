@@ -94,10 +94,10 @@ Once you have successfully installed the app and obtained the Bot User OAuth Tok
 
 
 Bot User OAuth Token ("Api key" in Savannah)
-xoxb-8416971596049-8800288699398-3TUg5SSBi3MSSYPQ8VIYW1tK
+[deleted]
 
 Client Secret ("Auth Secret" in Savannah)
-033b9e40b4e8762aa30ed42f2b95e835
+[deleted]
 
 Once you've created your Source you can run the importers with
 manage.py import all
